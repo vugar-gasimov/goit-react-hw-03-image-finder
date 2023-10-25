@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-export default class Searchbar extends Component {
+export class Searchbar extends Component {
   render() {
     return (
       <header className="searchbar">
@@ -12,8 +12,8 @@ export default class Searchbar extends Component {
           <input
             className="input"
             type="text"
-            autocomplete="off"
-            autofocus
+            autoComplete="off"
+            autoFocus
             placeholder="Search images and photos"
           />
         </form>

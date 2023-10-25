@@ -1,22 +1,18 @@
-import React, { Component } from 'react';
-import { fetchPics } from '../../Services/api';
-export default class ImageGallery extends Component {
-  state = {
-    loading: false,
-    error: null,
-    images: [],
-  };
-  async componentDidMount() {
-    const { images } = await fetchPics();
-    console.log(images);
-    fetchPics();
-  }
-  render() {
-    return (
-      <ul className="gallery">
-        {/* <! -- Set <li>
-  with images --> */}
-      </ul>
-    );
-  }
-}
+import React from 'react';
+
+import { ImageGalleryItem } from './ImageGalleryItem';
+export const ImageGallery = ({ photos = [] }) => {
+  return (
+    <ul className="gallery">
+      {photos.map(item => (
+        <ImageGalleryItem
+          key={item.id}
+          photo={item.webformatURL}
+          title={item.tags}
+          likes={item.likes}
+          {...item}
+        />
+      ))}
+    </ul>
+  );
+};

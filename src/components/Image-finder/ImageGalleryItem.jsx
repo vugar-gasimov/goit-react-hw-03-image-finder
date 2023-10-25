@@ -1,9 +1,16 @@
 import React from 'react';
-
-export const ImageGalleryItem = () => {
+import { FcLike } from 'react-icons/fc';
+export const ImageGalleryItem = ({ photo, title, likes }) => {
   return (
-    <li class="gallery-item">
-      <img src="" alt="" />
+    <li className="gallery-item">
+      <img src={photo} alt={title} />
+      <div>
+        <p>{title}</p>
+        <button>
+          <FcLike />
+          {likes}
+        </button>
+      </div>
     </li>
   );
 };
