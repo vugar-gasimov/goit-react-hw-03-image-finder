@@ -6,7 +6,11 @@ import { Button } from './Image-finder/Button';
 // import { Loader } from './Image-finder/Loader';
 import { fetchPics } from '../Services/api';
 import { toast } from 'react-toastify';
-
+import {
+  AppContainer,
+  TitleContainer,
+  ContentContainer,
+} from './Modal-window/App.Styled';
 export class App extends React.Component {
   state = {
     loading: false,
@@ -36,20 +40,9 @@ export class App extends React.Component {
   render() {
     const { photos } = this.state;
     return (
-      <div>
-        <div
-          style={{
-            height: '100vh',
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center',
-            fontSize: 40,
-            color: '#010101',
-          }}
-        >
-          React homework template
-        </div>
-        <div>
+      <AppContainer>
+        <TitleContainer>React homework template</TitleContainer>
+        <ContentContainer>
           <Searchbar />
           <h1>Image Gallery</h1>
           <h2>{this.state.error}</h2>
@@ -57,8 +50,8 @@ export class App extends React.Component {
           <Button />
           {/* <Loader />
           <Modal /> */}
-        </div>
-      </div>
+        </ContentContainer>
+      </AppContainer>
     );
   }
 }

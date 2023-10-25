@@ -1,9 +1,10 @@
 import React from 'react';
 
 import { ImageGalleryItem } from './ImageGalleryItem';
+import { StyledList } from './ImageFinder.Styled';
 export const ImageGallery = ({ photos = [] }) => {
   return (
-    <ul className="gallery">
+    <StyledList>
       {photos.map(item => (
         <ImageGalleryItem
           key={item.id}
@@ -13,6 +14,6 @@ export const ImageGallery = ({ photos = [] }) => {
           {...item}
         />
       ))}
-    </ul>
+    </StyledList>
   );
 };

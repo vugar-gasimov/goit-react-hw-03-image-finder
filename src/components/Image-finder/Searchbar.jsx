@@ -1,23 +1,32 @@
 import React, { Component } from 'react';
-
+import {
+  SearchbarHeader,
+  SearchForm,
+  SearchFormButton,
+  SearchFormButtonLabel,
+  SearchFormInput,
+} from './ImageFinder.Styled';
+import { Search } from 'lucide-react';
 export class Searchbar extends Component {
   render() {
     return (
-      <header className="searchbar">
-        <form className="form">
-          <button type="submit" className="button">
-            <span className="button-label">Search</span>
-          </button>
+      <SearchbarHeader>
+        <SearchForm>
+          <SearchFormButton type="submit">
+            <SearchFormButtonLabel>
+              <Search size={24} color="#1d2add" />
+            </SearchFormButtonLabel>
+          </SearchFormButton>
 
-          <input
+          <SearchFormInput
             className="input"
-            type="text"
+            type="search"
             autoComplete="off"
             autoFocus
             placeholder="Search images and photos"
           />
-        </form>
-      </header>
+        </SearchForm>
+      </SearchbarHeader>
     );
   }
 }
