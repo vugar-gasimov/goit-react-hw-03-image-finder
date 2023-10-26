@@ -10,14 +10,14 @@ import {
   DeleteButton,
 } from './ImageFinder.Styled';
 import { cutText } from '../../helpers/cutText';
-export const ImageGalleryItem = ({ photo, title, likes }) => {
+export const ImageGalleryItem = ({ webformatURL, tags, likes }) => {
   return (
     <GalleryItem>
       <div>
         <ImageContainer>
-          <Image src={photo} alt={title} />
+          <Image src={webformatURL} alt={tags} />
         </ImageContainer>
-        <Title>{cutText(title)}</Title>
+        <Title>{cutText(tags)}</Title>
         <ImageInfo>
           <LikeButton>
             <FcLike />

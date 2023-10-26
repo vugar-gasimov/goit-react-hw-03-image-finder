@@ -2,14 +2,14 @@ import styled from 'styled-components';
 
 export const AppContainer = styled.div`
   font-family: Arial, sans-serif;
-  background-color: #f0f0f0;
+  background-color: #3f51b5;
   text-align: center;
   padding: 20px;
 `;
 
 export const TitleContainer = styled.div`
   font-size: 24px;
-  color: #333;
+  color: white;
   margin: 20px 0;
 `;
 

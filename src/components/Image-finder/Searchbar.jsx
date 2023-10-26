@@ -8,10 +8,18 @@ import {
 } from './ImageFinder.Styled';
 import { Search } from 'lucide-react';
 export class Searchbar extends Component {
+  state = {
+    searchValue: '',
+  };
+  handleSubmit = event => {
+    event.preventDefault();
+    this.props.setQuery(this.state.searchValue);
+    this.setState({ searchValue: '' });
+  };
   render() {
     return (
       <SearchbarHeader>
-        <SearchForm>
+        <SearchForm onSubmit={this.handleSubmit}>
           <SearchFormButton type="submit">
             <SearchFormButtonLabel>
               <Search size={24} color="#1d2add" />
@@ -19,11 +27,14 @@ export class Searchbar extends Component {
           </SearchFormButton>
 
           <SearchFormInput
-            className="input"
+            onChange={event =>
+              this.setState({ searchValue: event.target.value })
+            }
+            value={this.state.searchValue}
             type="search"
             autoComplete="off"
             autoFocus
-            placeholder="Search images and photos"
+            placeholder="Feel free to search photos"
           />
         </SearchForm>
       </SearchbarHeader>

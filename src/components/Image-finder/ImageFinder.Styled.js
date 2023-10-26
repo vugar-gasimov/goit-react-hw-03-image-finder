@@ -158,16 +158,49 @@ export const LikeButton = styled.button`
   font-size: 16px;
   background: none;
   border: none;
-  cursor: pointer;
-  margin-right: 8px;
+  cursor: grabbing;
+  font-weight: bold;
+  color: white;
+  padding: 6px 12px;
+  transition: transform 0.3s ease;
+  &:hover {
+    transform: scale(0.9);
+  }
 `;
 
 export const DeleteButton = styled.button`
   font-size: 16px;
   background: none;
+  padding: 6px 12px;
   border: none;
-  color: #ff5733;
-  cursor: pointer;
+  color: black;
+  font-weight: bold;
+
+  cursor: grabbing;
+  background-color: white;
+  border-radius: 20px;
+  transition: transform 0.3s ease;
+  &:hover {
+    transform: scale(0.9);
+  }
 `;
 
 // ====================================================================================
+export const LoadmoreBtn = styled.button`
+  display: block;
+  margin: 0 auto;
+  padding: 8px 10px;
+  font-size: 1.2rem;
+  border-radius: 4px;
+  background-color: #3f51b5;
+  color: white;
+  cursor: pointer;
+  border: none;
+
+  transition: all 0.3s ease;
+  &:hover {
+    background-color: #3f51b5;
+    box-shadow: 0 0 10px 2px #3f51b5;
+  }
+`;
+// ===================================================================================

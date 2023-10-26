@@ -6,13 +6,7 @@ export const ImageGallery = ({ photos = [] }) => {
   return (
     <StyledList>
       {photos.map(item => (
-        <ImageGalleryItem
-          key={item.id}
-          photo={item.webformatURL}
-          title={item.tags}
-          likes={item.likes}
-          {...item}
-        />
+        <ImageGalleryItem key={item.id} {...item} />
       ))}
     </StyledList>
   );

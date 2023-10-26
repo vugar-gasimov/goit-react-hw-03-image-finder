@@ -1,5 +1,9 @@
 import React from 'react';
-
-export const Button = ({ children }) => {
-  return <button type="button">{children}</button>;
+import { LoadmoreBtn } from './ImageFinder.Styled';
+export const Button = ({ children, onClick }) => {
+  return (
+    <LoadmoreBtn onClick={onClick} type="button">
+      {children}
+    </LoadmoreBtn>
+  );
 };
