@@ -9,6 +9,7 @@ import {
   LikeButton,
   DeleteButton,
 } from './ImageFinder.Styled';
+import { cutText } from '../../helpers/cutText';
 export const ImageGalleryItem = ({ photo, title, likes }) => {
   return (
     <GalleryItem>
@@ -16,9 +17,8 @@ export const ImageGalleryItem = ({ photo, title, likes }) => {
         <ImageContainer>
           <Image src={photo} alt={title} />
         </ImageContainer>
-
+        <Title>{cutText(title)}</Title>
         <ImageInfo>
-          <Title>{title}</Title>
           <LikeButton>
             <FcLike />
             {likes}

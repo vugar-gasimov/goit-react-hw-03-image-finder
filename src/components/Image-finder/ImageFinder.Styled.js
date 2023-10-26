@@ -95,18 +95,30 @@ export const StyledList = styled.ul`
 
 export const GalleryItem = styled.li`
   list-style: none;
-  margin-bottom: 16px;
-  border: 2px solid;
+  margin-bottom: 10px;
+  border: 2px solid gray;
   padding: 10px 14px;
   box-shadow: 2px 2px 5px 1px gray;
+  background-color: #3f51b5;
+  border-radius: 20px;
+  color: white;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+  &:hover {
+    transform: scale(1.05);
+  }
 `;
 
 export const ImageContainer = styled.div`
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
   flex-direction: column;
   height: 400px;
+  overflow: hidden;
   align-items: center;
+  background-color: white;
+  border-radius: 10px;
+  justify-items: center;
 `;
 
 export const Image = styled.img`
@@ -121,19 +133,19 @@ export const Image = styled.img`
 export const ImageInfo = styled.div`
   text-align: center;
   margin-top: 0px;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  display: flex;
   overflow: hidden;
-  flex-direction: column;
-  height: 120px;
+  height: 50px;
   align-items: center;
+  flex-direction: row;
+  justify-content: space-between;
 `;
 
 export const Title = styled.p`
-  font-size: 18px;
+  font-size: 12px;
   font-weight: 600;
   margin: 4px 0;
-  font-weight: bold;
+  font-weight: 500;
   font-size: calc((1vw + 1vh) * 1.7);
   margin-bottom: 0px;
   border-bottom: 2px solid;
