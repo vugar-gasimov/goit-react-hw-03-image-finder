@@ -12,6 +12,11 @@ export const TitleContainer = styled.div`
   color: white;
   margin: 20px 0;
 `;
+export const GalleryTitle = styled.h1`
+  font-size: 24px;
+  color: #3f51b5;
+  margin: 20px 0;
+`;
 
 export const ContentContainer = styled.div`
   max-width: 100%;

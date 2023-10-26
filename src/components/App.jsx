@@ -11,23 +11,24 @@ import {
   AppContainer,
   TitleContainer,
   ContentContainer,
+  GalleryTitle,
 } from './Modal-window/App.Styled';
 import { INITIAL_STATE_POSTS } from './Image-finder/InitialState.js';
 export class App extends React.Component {
   state = { ...INITIAL_STATE_POSTS };
   async componentDidMount() {
-    this.getPhotos({ fn: fetchPics });
+    this.getPhotos();
   }
   async componentDidUpdate(_, prevState) {
     const { per_page, page, q } = this.state;
     if (prevState.page !== page || q !== prevState.q) {
-      this.getPhotos({ fn: fetchPics });
+      this.getPhotos();
     }
   }
   handleLoadMore = () => {
     this.setState(prevState => ({ page: prevState.page + prevState.per_page }));
   };
-  getPhotos = async ({ fn }) => {
+  getPhotos = async () => {
     this.setState({ loading: true });
     const { per_page, page, q } = this.state;
 
@@ -56,7 +57,7 @@ export class App extends React.Component {
         <TitleContainer>React homework template</TitleContainer>
         <ContentContainer>
           <Searchbar setQuery={this.handleSetQuery} />
-          {q && <h1>Image Gallery search request: {q}</h1>}
+          {q && <GalleryTitle>Image Gallery search request: {q}</GalleryTitle>}
 
           <h2>{this.state.error}</h2>
           <ImageGallery photos={photos} />
