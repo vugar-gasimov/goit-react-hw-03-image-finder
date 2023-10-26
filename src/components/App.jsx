@@ -12,7 +12,7 @@ import {
   TitleContainer,
   ContentContainer,
   GalleryTitle,
-} from './Modal-window/App.Styled';
+} from './App.Styled';
 import { INITIAL_STATE_POSTS } from './Image-finder/InitialState.js';
 export class App extends React.Component {
   state = { ...INITIAL_STATE_POSTS };
