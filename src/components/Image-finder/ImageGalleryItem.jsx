@@ -10,7 +10,7 @@ import {
   DeleteButton,
 } from './ImageFinder.Styled';
 import { cutText } from '../../helpers/cutText';
-import propTypes from 'prop-types';
+import PropTypes from 'prop-types';
 export const ImageGalleryItem = ({
   webformatURL,
   tags,
@@ -37,7 +37,7 @@ export const ImageGalleryItem = ({
 };
 
 ImageGalleryItem.propTypes = {
-  webformatURL: propTypes.string.isRequired,
-  tags: propTypes.string.isRequired,
-  toggleModal: propTypes.func.isRequired,
+  webformatURL: PropTypes.string.isRequired,
+  tags: PropTypes.string.isRequired,
+  toggleModal: PropTypes.func.isRequired,
 };
