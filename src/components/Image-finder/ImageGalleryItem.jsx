@@ -10,9 +10,15 @@ import {
   DeleteButton,
 } from './ImageFinder.Styled';
 import { cutText } from '../../helpers/cutText';
-export const ImageGalleryItem = ({ webformatURL, tags, likes }) => {
+import propTypes from 'prop-types';
+export const ImageGalleryItem = ({
+  webformatURL,
+  tags,
+  likes,
+  toggleModal,
+}) => {
   return (
-    <GalleryItem>
+    <GalleryItem onClick={toggleModal}>
       <div>
         <ImageContainer>
           <Image src={webformatURL} alt={tags} />
@@ -28,4 +34,10 @@ export const ImageGalleryItem = ({ webformatURL, tags, likes }) => {
       </div>
     </GalleryItem>
   );
+};
+
+ImageGalleryItem.propTypes = {
+  webformatURL: propTypes.string.isRequired,
+  tags: propTypes.string.isRequired,
+  toggleModal: propTypes.func.isRequired,
 };
