@@ -1,25 +1,18 @@
 import React from 'react';
 import { ImageGallery } from './Image-finder/ImageGallery';
 import { Searchbar } from './Image-finder/Searchbar';
-import { Button } from './Image-finder/Button';
+import { LoadMoreButton } from './Image-finder/Button';
 import { Modal } from './Modal-window/Modal';
 
 import { fetchPics } from '../Services/api';
 import { toast } from 'react-toastify';
-
+import { Blocks } from 'react-loader-spinner';
 import {
   AppContainer,
   TitleContainer,
   ContentContainer,
   GalleryTitle,
   LoaderContainer,
-  SideLeft,
-  SideRight,
-  SideTop,
-  Box1,
-  Box2,
-  Box3,
-  Box4,
 } from './App.Styled';
 import { INITIAL_STATE_POSTS } from './Image-finder/InitialState.js';
 export class App extends React.Component {
@@ -30,10 +23,12 @@ export class App extends React.Component {
   }
 
   async componentDidUpdate(_, prevState) {
-    const { page, q, total } = this.state;
+    const { page, q } = this.state;
     if (prevState.page !== page || q !== prevState.q) {
-      this.getPhotos();
-      toast.info('Nice photos ha');
+      this.setState({ loading: true }, () => {
+        this.getPhotos();
+        toast.info('Nice photos ha');
+      });
     }
   }
 
@@ -42,8 +37,8 @@ export class App extends React.Component {
   };
 
   getPhotos = async () => {
-    this.setState({ loading: true });
     const { per_page, page, q } = this.state;
+    this.setState({ loading: true });
 
     try {
       const response = await fetchPics({
@@ -51,17 +46,26 @@ export class App extends React.Component {
         page,
         q,
       });
+      if (response.total === undefined || response.total <= 0) {
+        this.setState({
+          error: 'Total count is missing or invalid',
+          loading: false,
+        });
+        toast.error('Total count is missing or invalid');
+        return;
+      }
       this.setState(prevState => ({
         photos: [...prevState.photos, ...response.hits],
         total: response.total,
         loading: false,
       }));
     } catch (error) {
-      this.setState({ error: error.message, loading: false });
+      this.setState({ error: error.message });
       toast.error(error.message);
+    } finally {
+      this.setState({ loading: false });
     }
   };
-
   handleSetQuery = q => {
     this.setState({ q, photos: [], total: null });
   };
@@ -71,7 +75,7 @@ export class App extends React.Component {
       if (isOpened) {
         toast.success('Wow what a beauty 😁');
       } else {
-        toast.info('Choose another one 😁');
+        toast.success("Let's choose another photo 😁");
       }
       return {
         isOpened,
@@ -94,7 +98,6 @@ export class App extends React.Component {
     }));
   };
 
-  // Function to display the previous photo
   handleBack = () => {
     this.setState(prevState => ({
       currentPhotoIndex:
@@ -121,34 +124,14 @@ export class App extends React.Component {
           <h2>{this.state.error}</h2>
           {loading && !photos.length ? (
             <LoaderContainer>
-              <div className="box box-1">
-                <Box1>
-                  <SideLeft></SideLeft>
-                  <SideRight></SideRight>
-                  <SideTop></SideTop>
-                </Box1>
-              </div>
-              <div className="box box-2">
-                <Box2>
-                  <SideLeft></SideLeft>
-                  <SideRight></SideRight>
-                  <SideTop></SideTop>
-                </Box2>
-              </div>
-              <div className="box box-3">
-                <Box3>
-                  <SideLeft></SideLeft>
-                  <SideRight></SideRight>
-                  <SideTop></SideTop>
-                </Box3>
-              </div>
-              <div className="box box-4">
-                <Box4>
-                  <SideLeft></SideLeft>
-                  <SideRight></SideRight>
-                  <SideTop></SideTop>
-                </Box4>
-              </div>
+              <Blocks
+                visible={true}
+                height="80"
+                width="80"
+                ariaLabel="blocks-loading"
+                wrapperStyle={{}}
+                wrapperClass="blocks-wrapper"
+              />
             </LoaderContainer>
           ) : (
             <ImageGallery
@@ -157,13 +140,9 @@ export class App extends React.Component {
               toggleModal={this.toggleModal}
             />
           )}
-
           {total > photos.length ? (
-            <Button loading={loading} onClick={this.handleLoadMore}>
-              {!loading ? 'Loading...' : 'Load more'}
-            </Button>
+            <LoadMoreButton loading={loading} onClick={this.handleLoadMore} />
           ) : null}
-
           {isOpened && selectedPhoto ? (
             <Modal close={this.toggleModal} selectedPhoto={selectedPhoto} />
           ) : null}
