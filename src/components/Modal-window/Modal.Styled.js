@@ -15,7 +15,7 @@ export const Title = styled.p`
   color: white;
   font-size: 12px;
   font-weight: 600;
-  margin: 4px 0;
+  margin: 0;
   font-weight: 500;
   font-size: calc((1vw + 1vh) * 1.7);
 `;
@@ -60,7 +60,7 @@ export const TitleModal = styled.div`
 `;
 
 export const ImageContainer = styled.div`
-  padding: 20px;
+  padding: 3px 20px 3px;
   text-align: center;
   height: 700px;
 `;

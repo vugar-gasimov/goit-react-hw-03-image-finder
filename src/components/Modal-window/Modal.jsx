@@ -64,16 +64,15 @@ export class Modal extends React.Component {
                 src={selectedPhoto.largeImageURL}
                 alt={selectedPhoto.tags}
               />
+              <ImageInfo>
+                <Title>{selectedPhoto.tags}</Title>
+                <LikeButton>
+                  <FcLike />
+                  {selectedPhoto.likes}
+                </LikeButton>
+                <DeleteButton>Delete</DeleteButton>
+              </ImageInfo>
             </ImageContainer>
-
-            <ImageInfo>
-              <Title>{selectedPhoto.tags}</Title>
-              <LikeButton>
-                <FcLike />
-                {selectedPhoto.likes}
-              </LikeButton>
-              <DeleteButton>Delete</DeleteButton>
-            </ImageInfo>
           </div>
         </div>
       </StyledWrapper>

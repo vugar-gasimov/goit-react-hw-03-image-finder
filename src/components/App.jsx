@@ -92,19 +92,28 @@ export class App extends React.Component {
     }));
   };
   handleNext = () => {
-    this.setState(prevState => ({
-      currentPhotoIndex:
-        (prevState.currentPhotoIndex + 1) % prevState.photos.length,
-    }));
-  };
+    const { currentPhotoIndex, photos } = this.state;
 
+    // Check if photos is an array and not undefined
+    if (Array.isArray(photos) && photos.length > 0) {
+      this.setState({
+        currentPhotoIndex: (currentPhotoIndex + 1) % photos.length,
+      });
+    } else {
+      console.error('No photos or invalid photos array!');
+    }
+  };
   handleBack = () => {
-    this.setState(prevState => ({
-      currentPhotoIndex:
-        prevState.currentPhotoIndex <= 0
-          ? prevState.photos.length - 1
-          : prevState.currentPhotoIndex - 1,
-    }));
+    const { currentPhotoIndex, photos } = this.state;
+
+    // Check if photos is an array and not undefined
+    if (Array.isArray(photos) && photos.length > 0) {
+      this.setState({
+        currentPhotoIndex: (currentPhotoIndex - 1) % photos.length,
+      });
+    } else {
+      console.error('No photos or invalid photos array!');
+    }
   };
   render() {
     const { photos, q, total, loading, isOpened, currentPhotoIndex } =
@@ -144,7 +153,13 @@ export class App extends React.Component {
             <LoadMoreButton loading={loading} onClick={this.handleLoadMore} />
           ) : null}
           {isOpened && selectedPhoto ? (
-            <Modal close={this.toggleModal} selectedPhoto={selectedPhoto} />
+            <Modal
+              close={this.toggleModal}
+              selectedPhoto={selectedPhoto}
+              next={this.handleNext}
+              back={this.handleBack}
+              changePhoto={index => this.setState({ currentPhotoIndex: index })}
+            />
           ) : null}
         </ContentContainer>
       </AppContainer>
