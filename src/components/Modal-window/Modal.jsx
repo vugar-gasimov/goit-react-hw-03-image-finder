@@ -2,11 +2,17 @@ import React from 'react';
 import { toast } from 'react-toastify';
 import { FcLike } from 'react-icons/fc';
 import {
-  Image,
+  StyledWrapper,
+  RightCenterButton,
+  LeftCenterButton,
+  UnderPhotoButton,
+  ImageContainer,
+  StyledImage,
   Title,
   LikeButton,
+  ImageInfo,
   DeleteButton,
-} from '../Image-finder/ImageFinder.Styled';
+} from './Modal.Styled';
 import propTypes from 'prop-types';
 
 export class Modal extends React.Component {
@@ -41,32 +47,31 @@ export class Modal extends React.Component {
     const { selectedPhoto, close } = this.props;
 
     return (
-      <div onClick={this.handleClickOutside}>
+      <StyledWrapper onClick={this.handleClickOutside}>
+        <RightCenterButton onClick={this.props.next}>→</RightCenterButton>
+        <LeftCenterButton onClick={this.props.back}>←</LeftCenterButton>
+        <UnderPhotoButton onClick={close}>✕</UnderPhotoButton>
+
         <div>
-          <button onClick={close}>✕</button>
-          <h1>Welcome to Modal 😁</h1>
           <div>
-            <div>
-              <div>
-                <Image
-                  src={selectedPhoto.largeImageURL}
-                  width={700}
-                  height={700}
-                  alt={selectedPhoto.tags}
-                />
-              </div>
+            <ImageContainer>
+              <StyledImage
+                src={selectedPhoto.largeImageURL}
+                alt={selectedPhoto.tags}
+              />
+            </ImageContainer>
+
+            <ImageInfo>
               <Title>{selectedPhoto.tags}</Title>
-              <div>
-                <LikeButton>
-                  <FcLike />
-                  {selectedPhoto.likes}
-                </LikeButton>
-                <DeleteButton>Delete</DeleteButton>
-              </div>
-            </div>
+              <LikeButton>
+                <FcLike />
+                {selectedPhoto.likes}
+              </LikeButton>
+              <DeleteButton>Delete</DeleteButton>
+            </ImageInfo>
           </div>
         </div>
-      </div>
+      </StyledWrapper>
     );
   }
 

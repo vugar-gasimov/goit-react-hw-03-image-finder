@@ -3,7 +3,7 @@ import { ImageGallery } from './Image-finder/ImageGallery';
 import { Searchbar } from './Image-finder/Searchbar';
 import { Button } from './Image-finder/Button';
 import { Modal } from './Modal-window/Modal';
-// import { Loader } from './Image-finder/Loader';
+
 import { fetchPics } from '../Services/api';
 import { toast } from 'react-toastify';
 
@@ -12,6 +12,14 @@ import {
   TitleContainer,
   ContentContainer,
   GalleryTitle,
+  LoaderContainer,
+  SideLeft,
+  SideRight,
+  SideTop,
+  Box1,
+  Box2,
+  Box3,
+  Box4,
 } from './App.Styled';
 import { INITIAL_STATE_POSTS } from './Image-finder/InitialState.js';
 export class App extends React.Component {
@@ -57,11 +65,18 @@ export class App extends React.Component {
   handleSetQuery = q => {
     this.setState({ q, photos: [], total: null });
   };
-
   toggleModal = photo => {
-    this.setState({
-      isOpened: !this.state.isOpened,
-      currentPhotoIndex: this.state.photos.indexOf(photo),
+    this.setState(prevState => {
+      const isOpened = !prevState.isOpened;
+      if (isOpened) {
+        toast.success('Wow what a beauty 😁');
+      } else {
+        toast.info('Choose another one 😁');
+      }
+      return {
+        isOpened,
+        currentPhotoIndex: prevState.photos.indexOf(photo),
+      };
     });
   };
 
@@ -104,14 +119,48 @@ export class App extends React.Component {
             </GalleryTitle>
           )}
           <h2>{this.state.error}</h2>
-          <ImageGallery
-            photos={photos}
-            handleLikes={this.handleLikes}
-            toggleModal={this.toggleModal}
-          />
+          {loading && !photos.length ? (
+            <LoaderContainer>
+              <div className="box box-1">
+                <Box1>
+                  <SideLeft></SideLeft>
+                  <SideRight></SideRight>
+                  <SideTop></SideTop>
+                </Box1>
+              </div>
+              <div className="box box-2">
+                <Box2>
+                  <SideLeft></SideLeft>
+                  <SideRight></SideRight>
+                  <SideTop></SideTop>
+                </Box2>
+              </div>
+              <div className="box box-3">
+                <Box3>
+                  <SideLeft></SideLeft>
+                  <SideRight></SideRight>
+                  <SideTop></SideTop>
+                </Box3>
+              </div>
+              <div className="box box-4">
+                <Box4>
+                  <SideLeft></SideLeft>
+                  <SideRight></SideRight>
+                  <SideTop></SideTop>
+                </Box4>
+              </div>
+            </LoaderContainer>
+          ) : (
+            <ImageGallery
+              photos={photos}
+              handleLikes={this.handleLikes}
+              toggleModal={this.toggleModal}
+            />
+          )}
+
           {total > photos.length ? (
-            <Button onClick={this.handleLoadMore}>
-              {loading ? 'Loading...' : 'Load more'}
+            <Button loading={loading} onClick={this.handleLoadMore}>
+              {!loading ? 'Loading...' : 'Load more'}
             </Button>
           ) : null}
 
