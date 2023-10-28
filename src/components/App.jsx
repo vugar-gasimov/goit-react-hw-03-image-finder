@@ -33,7 +33,7 @@ export class App extends React.Component {
   }
 
   handleLoadMore = () => {
-    this.setState(prevState => ({ page: prevState.page + prevState.per_page }));
+    this.setState(prevState => ({ page: prevState.page + 1 }));
   };
 
   getPhotos = async () => {
